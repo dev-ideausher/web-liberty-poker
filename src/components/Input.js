@@ -18,6 +18,7 @@ const inputVariants = cva("w-full peer focus:outline-none",{
     variants:{
         variant:{
             poker:"toggler-shadow rounded-lg font-jakarta text-base bg-white text-black px-4 py-2 placeholder-shown:text-neutral4",
+            earn:"rounded-full text-[32px] bg-white text-black px-4 py-2.5 text-primary placeholder-shown:text-primary font-extralight text-shadow-[0_2px_4px_#000] earn-input",
             pokerlarge:"toggler-shadow rounded-lg font-jakarta text-base bg-white text-black px-4 py-4 placeholder-shown:text-neutral4",
         },
         type:{

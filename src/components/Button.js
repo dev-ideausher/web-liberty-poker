@@ -14,11 +14,12 @@ export default function Button({children,variant, buttontype,size, className, di
   )
 }
 
-const buttonVariants = cva("flex items-center justify-center rounded-lg font-inter leading-snug font-semibold hover:-translate-y-1 origin-center transition-all ease-in-out",{
+const buttonVariants = cva("flex items-center justify-center rounded-lg font-inter leading-snug font-semibold hover:-translate-y-1 origin-center transition-all ease-in-out cursor-pointer",{
     variants:{
         variant:{
-            primary:"border-shadow bg-primary text-white",
-            secondary: "secondary-border-shadow bg-secondary text-white",
+            primary:"border-dark-red border-[8px] rounded-[29px] shadow-[0_4px_4px_0_rgba(0,0,0,.25)] bg-red text-primary ",
+            "outline-primary":"button-outline-primary text-primary",
+            secondary: "text-primary dark-button-gradient",
             "gradient": "btn-primary rounded-full",
             "icon": "rounded-2xl bg-teal teal-shadow border-2 border-[#01796F]",
             teal: "bg-[#01796F] rounded-full teal-button-shadow border border-[#01796fbd] text-white",
@@ -39,7 +40,7 @@ const buttonVariants = cva("flex items-center justify-center rounded-lg font-int
     },
     defaultVariants:{
         variant: "primary",
-        buttontype: "md",
+        buttontype: "sm",
         size: "fw"
     }
 })
