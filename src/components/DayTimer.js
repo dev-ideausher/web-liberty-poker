@@ -35,7 +35,7 @@ export default function DayTimer({ minutes = null, futureDate = null, className 
       const s = Math.floor((diff / 1000) % 60);
 
       setTimeLeft({
-        days: d.toString().padStart(2, "0"),
+        days: d.toString().padStart(2),
         hours: h.toString().padStart(2, "0"),
         minutes: m.toString().padStart(2, "0"),
         seconds: s.toString().padStart(2, "0"),
@@ -51,10 +51,10 @@ export default function DayTimer({ minutes = null, futureDate = null, className 
   return (
     <div className={`text-xl font-semibold ${className}`}>
       {timeLeft.days !== "00" && (
-        <span>{timeLeft.days}d : </span>
+        <span>{timeLeft.days}d </span>
       )}
-      <span>{timeLeft.hours}h : </span>
-      <span>{timeLeft.minutes}m : </span>
+      <span>{timeLeft.hours}h </span>
+      <span>{timeLeft.minutes}m </span>
       <span>{timeLeft.seconds}s</span>
     </div>
   );
