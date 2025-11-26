@@ -5,6 +5,7 @@ import Button from "@/components/Button";
 import DepositeLoader from "@/components/DepositeLoader";
 import ChooseRankTable from "@/modules/ChooseRankTable";
 import HomeOptions from "@/modules/HomeOptions";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   // ----------------------------
@@ -37,7 +38,7 @@ export default function Page() {
       console.warn("Invalid rank received:", value);
     }
   };
-
+  const router = useRouter()
   return (
     <div className={`w-full min-h-screen relative`}>
       <img
@@ -46,7 +47,7 @@ export default function Page() {
         className="h-full absolute w-full object-cover z-10"
       />
 
-      <div className="w-full h-full absolute top-0 left-0 z-20 bg-linear-to-b from-[#00000000] to-[#00000099]"></div>
+      {/* <div className="w-full h-full absolute top-0 left-0 z-20 bg-linear-to-b from-[#00000000] to-[#00000099]"></div> */}
 
       <div className="layout-container flex flex-col items-center pb-10 relative z-30">
         <div className="w-full flex items-center justify-between pt-5">
@@ -101,7 +102,7 @@ export default function Page() {
             </h5>
           </div>
 
-          <Button className={"w-fit text-[48px] font-ruso font-normal"}>
+          <Button onClick={()=>router.back()} className={"w-fit text-[48px] font-ruso font-normal"}>
             DEPOSIT & UPGRADE
           </Button>
         </div>

@@ -14,17 +14,18 @@ export default function Button({children,variant, buttontype,size, className, di
   )
 }
 
-const buttonVariants = cva("flex items-center justify-center rounded-lg font-inter leading-snug font-semibold hover:-translate-y-1 origin-center transition-all ease-in-out cursor-pointer",{
+const buttonVariants = cva("flex items-center justify-center rounded-lg font-inter leading-snug font-semibold border-[5px] hover:-translate-y-1 origin-center transition-all ease-in-out cursor-pointer",{
     variants:{
         variant:{
-            primary:"border-dark-red border-[8px] rounded-[29px] shadow-[0_4px_4px_0_rgba(0,0,0,.25)] bg-red text-primary ",
+            primary:"border-dark-red  rounded-[20px] shadow-[0_4px_4px_0_rgba(0,0,0,.25)] bg-red text-primary ",
             "outline-primary":"button-outline-primary text-primary",
             secondary: "text-primary dark-button-gradient",
             "gradient": "btn-primary rounded-full",
             "icon": "rounded-2xl bg-teal teal-shadow border-2 border-[#01796F]",
             teal: "bg-[#01796F] rounded-full teal-button-shadow border border-[#01796fbd] text-white",
             "white": "bg-white text-white toggler-shadow",
-            'white-teal':'bg-white text-teal'
+            'white-teal':'bg-white text-teal',
+            "custom":""
         },
         buttontype:{
             sm: "text-sm px-2 py-2",

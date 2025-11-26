@@ -1,5 +1,6 @@
 "use client";
 import RedCross from "@/icons/RedCross";
+import { useRouter } from "next/navigation";
 import React, { useRef, useEffect, useState } from "react";
 
 export default function VideoRewardModal({ 
@@ -7,6 +8,7 @@ export default function VideoRewardModal({
   onClose, 
   autoPlay = true 
 }) {
+  const router = useRouter()
   const videoRef = useRef(null);
   const [showClose, setShowClose] = useState(false);
   useEffect(() => {
@@ -33,11 +35,14 @@ export default function VideoRewardModal({
   
     const handleTimeUpdate = () => {
       const progress = (video.currentTime / video.duration) * 100;
-      if (progress >= 70 && !showClose) setShowClose(true);
+      if (progress >= 99 && !showClose) setShowClose(true);
     };
   
     const handleEnded = () => {
-      if (onClose) onClose();
+      if (onClose) {
+        onClose();
+        router.push("/creating-table")
+      }
     };
   
     video.addEventListener("timeupdate", handleTimeUpdate);
