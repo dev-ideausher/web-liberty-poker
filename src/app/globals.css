@@ -41,6 +41,9 @@ body {
   margin: 0;
   padding: 0;
 }
+input[type="radio"], input[type="checkbox"]{
+  accent-color: chocolate;
+}
 .layout-container{
   width: 100%;
   max-width: 1360px;
@@ -163,6 +166,12 @@ body {
   box-shadow: 0 4px 20px 0 #000;
   backdrop-filter: blur(2px);
 }
+.heading-input{
+  border-radius: 25px;
+  border: 2px solid #600000;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, #000 100%);
+  box-shadow: 0 4px 20px 0 #000;
+}
 .table-btns{
   border: 3px solid #F4E17E;
   background: linear-gradient(270deg, rgba(173, 44, 44, 0.90) 0%, rgba(96, 0, 0, 0.90) 100%);
@@ -195,4 +204,14 @@ body {
   linear-gradient(270deg, #1E321E 0%, #506E3C 100%);
   background-blend-mode: soft-light;
   z-index: 99 !important;
+}
+/* remove number input arrows */
+.remove-arrows::-webkit-outer-spin-button,
+.remove-arrows::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.remove-arrows {
+  -moz-appearance: textfield; /* Firefox */
 }
