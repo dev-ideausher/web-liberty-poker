@@ -1,15 +1,15 @@
 "use client"
 import ProgressLoader from '@/components/ProgressLoader'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export default function page() {
     const router = useRouter()
-    useEffect(()=>{
+    const handler = () => {
         setTimeout(()=>{
             router.push("/table/doc_1234")
         },[6000])
-    },[])
+    }
     return (
         <div className={`w-full min-h-screen relative`}>
             <img src="/images/banners/creating.png" alt="bba" className="h-screen absolute w-full aspect-video z-10" />
@@ -21,7 +21,7 @@ export default function page() {
 
                 <div className='flex flex-col items-center'>
                     <h2 className='text-[40px] font-normal text-primary normal-text-shadow text-center font-bebas leading-none'>Creating Table For You</h2>
-                    <ProgressLoader className={"w-1/2"} />
+                    <ProgressLoader className={"w-1/2"} onComplete={handler} />
                     <h1 className='text-[58px] text-primary font-normal font-bebas normal-text-shadow text-center leading-none mt-7'>Earn 30% of commission for Life from Every Hand your Recruits Play</h1>
                     <p className='text-[36px] font-normal text-primary normal-text-shadow text-center line-through'>Learn More</p>
                 </div>
