@@ -6,9 +6,11 @@ import Envelop from '@/icons/Envelop'
 import Reward from '@/icons/Reward'
 import ShareLarge from '@/icons/ShareLarge'
 import UserCircle from '@/icons/UserCircle'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 export default function page() {
+    const router = useRouter()
     const [joined,setJoined] = useState(false)
     useEffect(()=>{
         setTimeout(()=>{
@@ -65,7 +67,7 @@ export default function page() {
                         </div>
                         <p className='text-2xl font-normal text-center text-primary'>Reserved for 15 minutes & 59 seconds</p>
                         <ProgressLoader className={"w-4/5 mx-auto"} />
-                        <Button disabled={!joined} className={`mt-10 text-[40px] font-normal font-ruso rounded-full mx-auto w-1/2 ${joined ? '':'opacity-50'}`}>Start</Button>
+                        <Button onClick={()=>router.push("/table/doc_12345")} disabled={!joined} className={`mt-10 text-[40px] font-normal font-ruso rounded-full mx-auto w-1/2 ${joined ? '':'opacity-50'}`}>Start</Button>
                     </div>
                 </div>
                 <h3 className='text-[58px] text-primary font-normal font-bebas normal-text-shadow text-center leading-none mt-16'>Earn 33% for life from every hand your invitees play forever</h3>

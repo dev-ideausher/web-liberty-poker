@@ -102,7 +102,7 @@ export default function Page() {
             </h5>
           </div>
 
-          <Button onClick={()=>router.back()} className={"w-fit text-[48px] font-ruso font-normal"}>
+          <Button onClick={()=>router.push("/table-ready")} className={"w-fit text-[48px] font-ruso font-normal"}>
             DEPOSIT & UPGRADE
           </Button>
         </div>

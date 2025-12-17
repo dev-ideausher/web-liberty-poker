@@ -1,10 +1,18 @@
+"use client"
 import Button from '@/components/Button'
 import DayTimer from '@/components/DayTimer'
 import Input from '@/components/Input'
 import Book from '@/icons/Book'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
 
 export default function page() {
+    const router = useRouter()
+    useEffect(()=>{
+        setTimeout(()=>{
+            router.push("/players-joined")
+        },[4000])
+    },[])
     return (
         
         <div className={`w-full min-h-screen relative`}>

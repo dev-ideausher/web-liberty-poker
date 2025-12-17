@@ -1,7 +1,15 @@
+"use client"
 import ProgressLoader from '@/components/ProgressLoader'
-import React from 'react'
+import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
 
 export default function page() {
+    const router = useRouter()
+    useEffect(()=>{
+        setTimeout(()=>{
+            router.push("/table/doc_1234")
+        },[6000])
+    },[])
     return (
         <div className={`w-full min-h-screen relative`}>
             <img src="/images/banners/creating.png" alt="bba" className="h-screen absolute w-full aspect-video z-10" />

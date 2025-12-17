@@ -6,16 +6,18 @@ import SettingsT from '@/icons/SettingsT'
 import Up from '@/icons/Up'
 import MyPosition from '@/modules/TableModules/MyPosition'
 import PlayerPosition from '@/modules/TableModules/PlayerPosition'
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 export default function page() {
+    const router = useRouter()
     const [messageState,setMessageState] = useState('')
 
     return (
         <div className="w-full bg-[url('/images/banners/match.png')] bg-cover py-2 min-h-screen">
             <div className='layout-container flex flex-col justify-between'>
                 <div className='w-full flex items-center justify-between'>
-                    <div className='table-btns rounded-lg size-16 flex items-center justify-center'><Back/></div>
+                    <div onClick={()=>router.back()} className='table-btns rounded-lg size-16 flex items-center justify-center'><Back/></div>
                     <div className='table-btns rounded-lg size-16 flex items-center justify-center'><SettingsT/></div>
                 </div>
                 <div className='relative w-3/4 mx-auto'>
