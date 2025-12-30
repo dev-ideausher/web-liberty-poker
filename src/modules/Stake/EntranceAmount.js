@@ -59,7 +59,7 @@ export default function EntranceAmount({ title, amount = [], free=false, locked=
                 )}
                 </div>
                 {free && <div className=" absolute -top-6 -right-7"><FreeBadge/></div>}
-                {locked && <div onClick={depositeModalHandler} className="w-full h-full absolute top-0 left-0 bg-[#00000080] cursor-pointer rounded-full flex items-center justify-center">
+                {locked && <div onClick={depositeModalHandler} className="w-full h-full absolute top-0 left-0 bg-[#00000080] backdrop-blur-[1px] cursor-pointer rounded-full flex items-center justify-center">
                     <Lock/>
                 </div>}
             </Button>

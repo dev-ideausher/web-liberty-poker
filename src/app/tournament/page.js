@@ -82,8 +82,8 @@ export default function page() {
                     timer={true}
                 />
             </div>
-            <Link href="/watch-and-earn" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64 mt-10">
-                <p className='text-[40px] w-full font-cinzel font-black text-center leading-none -mt-4'>JOIN<br/> TABLE</p>
+            <Link href="/watch-and-earn" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64 mt-16">
+                <p className='text-[40px] w-full font-cinzel font-black text-center leading-none -mt-4'>JOIN<br/> NEXT</p>
             </Link>
             <HomeOptions/>
         </div>

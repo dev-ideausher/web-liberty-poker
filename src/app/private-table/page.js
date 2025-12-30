@@ -58,8 +58,8 @@ export default function page() {
               <SimpleTextInput title="TABLE PROFIT" />
             </Accordion>
           </div>}
-          <Link href="/choose-rank" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64">
-              <p className='text-[40px] w-full font-cinzel font-black text-center leading-none -mt-4'>JOIN<br/> TABLE</p>
+          <Link href="/choose-rank" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[380px] h-72">
+              <p className='text-[40px] w-full font-cinzel font-black text-center leading-none -mt-0'>CREATE<br/> TABLE</p>
           </Link>
           <HomeOptions/>
         </div>

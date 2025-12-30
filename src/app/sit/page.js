@@ -9,8 +9,10 @@ import React from 'react'
 
 export default function page() {
   return (
-    <div className="min-h-screen h-full w-full flex bg-[url('/images/banners/banner-sit.png')] flex-col justify-end items-center bg-cover bg-center">
-        <div className="h-full z-20 layout-container pb-5 flex flex-col items-center">
+    <div className="min-h-screen h-full w-full flex relative flex-col justify-end items-center bg- bg-center">
+        <img src="/images/banners/banner-sit.png" alt="bba" className="h-full absolute w-full" />
+
+        <div className="h-full z-20 layout-container pb-6 flex flex-col items-center">
             <div className='layout-container flex items-center justify-between'>
                 <Link href="/private-table"><Button variant={"secondary"} className={"w-fit py-4 px-3 text-[32px]"}>PRIVATE TABLE</Button></Link>
                 <h2 className='heading-texts text-[120px] font-cinzel font-black text-center'>SIT & GO</h2>
@@ -77,9 +79,9 @@ export default function page() {
                 />
             </div>
            
-            <h3 className='text-[55px] normal-text-shadow uppercase font-normal font-ruso leading-none mt-5'>ENTRANCE AMOUNT</h3>
+            <h3 className='text-[55px] normal-text-shadow uppercase font-normal font-ruso leading-none mt-16'>ENTRANCE AMOUNT</h3>
             <h4 className='text-[32px] font-bold text-primary normal-text-shadow'>Min 0.3  ______ Max 0.6 $</h4>
-            <Link href="/watch-and-earn" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64">
+            <Link href="/watch-and-earn" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64 mt-7">
                 <p className='text-[40px] w-full font-cinzel font-black text-center leading-none -mt-4'>JOIN<br/> TABLE</p>
             </Link>
             <HomeOptions/>
