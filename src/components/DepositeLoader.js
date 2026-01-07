@@ -1,7 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-export default function DepositeLoader({
+export default function 
+
+
+DepositeLoader({
   className = "",
   height = 55,
   targetPoint = 0,

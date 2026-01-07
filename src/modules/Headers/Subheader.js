@@ -29,7 +29,7 @@ export default function Subheader() {
         
         <div className='flex w-6/12 gap-2 justify-end'>
             <Button variant={"secondary"} className={"w-fit capitalize"}>{name?name: <PulseLoader color='#E39A08' size={8} />}</Button>
-            <Button variant='gradient' className="px-8 font-bold w-fit" onClick={()=> router.push('/funds')}>
+            <Button variant='gradient' className="px-8 font-bold w-fit" onClick={()=> router.push('/choose-rank')}>
                 {balances ? `${displayBalance} USDC` : <PulseLoader color='#E39A08' size={8} />}
             </Button>
 
