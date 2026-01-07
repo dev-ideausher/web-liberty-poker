@@ -81,7 +81,7 @@ export default function page() {
            
             <h3 className='text-[55px] normal-text-shadow uppercase font-normal font-ruso leading-none mt-16'>ENTRANCE AMOUNT</h3>
             <h4 className='text-[32px] font-bold text-primary normal-text-shadow'>Min 0.3  ______ Max 0.6 $</h4>
-            <Link href="/watch-and-earn" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64 mt-7">
+            <Link href="/creating-table" className="bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64 mt-7">
                 <p className='text-[40px] w-full font-cinzel font-black text-center leading-none -mt-4'>JOIN<br/> TABLE</p>
             </Link>
             <HomeOptions/>

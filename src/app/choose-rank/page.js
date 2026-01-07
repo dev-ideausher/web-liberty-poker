@@ -6,6 +6,8 @@ import DepositeLoader from "@/components/DepositeLoader";
 import ChooseRankTable from "@/modules/ChooseRankTable";
 import HomeOptions from "@/modules/HomeOptions";
 import { useRouter } from "next/navigation";
+import RedCross from "@/icons/RedCross";
+import Link from "next/link";
 
 export default function Page() {
   // ----------------------------
@@ -54,6 +56,7 @@ export default function Page() {
           <h2 className="normal-text-shadow text-[48px] uppercase font-normal font-bebas">
             Liberty Poker
           </h2>
+          <Link href={"/watch-and-earn"}><RedCross/></Link>
         </div>
 
         <h1 className="text-[80px] text-primary font-black font-cinzel glow-shadow text-center leading-none">

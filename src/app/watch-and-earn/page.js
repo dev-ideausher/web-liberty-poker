@@ -6,6 +6,7 @@ import CircleTickPrimary from '@/icons/CircleTickPrimary'
 import GreenTick from '@/icons/GreenTick'
 import RedCross from '@/icons/RedCross'
 import HomeOptions from '@/modules/HomeOptions'
+import Link from 'next/link'
 import React, { useState } from 'react'
 
 export default function page() {
@@ -26,6 +27,7 @@ export default function page() {
             <div className='layout-container flex flex-col items-center pb-5 relative'>
                 <div className='w-full flex items-center justify-between pt-5'>
                     <h2 className='normal-text-shadow text-[48px] uppercase font-normal font-bebas'>Liberty Poker</h2>
+                    <Link href={"/sit"}><RedCross/></Link>
                 </div>
                 <img src="/images/tv.svg" alt="tv" className={`absolute top-1/4 right-[10%] ${isValid ? '':'opacity-50'}`} />
                 <h1 className='text-[70px] font-black text-primary font-cinzel text-primary-shadow text-center leading-none mt-5'>WATCH & EARN 0.3$ CASH REWARD</h1>

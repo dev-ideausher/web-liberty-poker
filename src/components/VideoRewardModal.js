@@ -41,7 +41,7 @@ export default function VideoRewardModal({
     const handleEnded = () => {
       if (onClose) {
         onClose();
-        router.push("/creating-table")
+        router.push("/sit")
       }
     };
   

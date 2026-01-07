@@ -4,7 +4,7 @@ import React from "react";
 import Instruction from "@/icons/Instruction";
 import GreenTick from "@/icons/GreenTick";
 import RedCross from "@/icons/RedCross";
-import { TABLE_VARIANTS } from "@/utilities/helper";
+import { TABLE_VARIANTS } from "@/utilities/staticData";
 
 export default function ChooseRankTable({ variant = 14 }) {
   const tableData = TABLE_VARIANTS[variant];

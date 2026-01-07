@@ -17,7 +17,7 @@ export default function page() {
         <div className="w-full bg-[url('/images/banners/match.png')] bg-cover py-2 min-h-screen">
             <div className='layout-container flex flex-col justify-between'>
                 <div className='w-full flex items-center justify-between'>
-                    <div onClick={()=>router.back()} className='table-btns rounded-lg size-16 flex items-center justify-center'><Back/></div>
+                    <div onClick={()=>router.push("/sit")} className='table-btns rounded-lg size-16 flex items-center justify-center'><Back/></div>
                     <div className='table-btns rounded-lg size-16 flex items-center justify-center'><SettingsT/></div>
                 </div>
                 <div className='relative w-3/4 mx-auto'>
