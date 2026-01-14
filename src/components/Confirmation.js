@@ -17,7 +17,7 @@ export default function Confirmation({cancelHandler, confirmHandler}) {
             <h4 className='font-inter font-medium text-black font-base opacity-70'>By tap on yes you will leave the game room. All of your winnings will settle down for this session.</h4>
             <div className='w-full grid grid-cols-2 gap-5 mt-5'>
                 <Button variant={"teal"} className={"rounded-lg"} onClick={()=> cancelHandler(false)}>No</Button>
-                <Button variant={"primary"} onClick={handler} className={`${loading ? 'opacity-50':''}`} disabled={loading}>Yes, Quit it!</Button>
+                <Button variant={"primary"} onClick={handler} className={`border-transparent rounded-lg ${loading ? 'opacity-50':''}`} disabled={loading}>Yes, Quit it!</Button>
             </div>
         </div>
     </div>

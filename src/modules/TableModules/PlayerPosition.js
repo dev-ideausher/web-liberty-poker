@@ -35,13 +35,27 @@ export default function PlayerPosition({
     folded: "opacity-50",
     "all-in": "opacity-70",
   };
-
+  console.log(className,
+    position,
+    player,
+    hasTurn,
+    playerTurn,
+    meter,
+    isSmallBlind,
+    isBigBlind,
+    isDealer,
+    badgePosition,
+    cardsposition,
+    ownView = false,
+    status,
+    index,
+    myposition,)
   return (
     <div
       style={{ top: `${position.top}`, left: `${position.left}` }}
       className={`${hasTurn ? "animate" : ""} absolute ${
         className || ""
-      } flex flex-wrap items-center justify-center`}
+      } flex flex-wrap items-center justify-center z-30`}
     >
       <div
         onClick={infoModalHandler}
@@ -128,7 +142,7 @@ export default function PlayerPosition({
       )}
 
       {/* Badges */}
-      {isDealer && isDealer.player._id == player._id && (
+      {isDealer && isDealer?.player?._id == player?._id && (
         <img
           src="/images/dealer.svg"
           className="size-6 absolute"

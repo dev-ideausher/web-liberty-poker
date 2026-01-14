@@ -264,7 +264,7 @@ export const playerPositions = [
     },
     badge:{
       top:"130px",
-      left:"600px"
+      left:"-50px"
     },
     cardsposition: "right",
     index: 0
@@ -276,7 +276,7 @@ export const playerPositions = [
     },
     badge: {
       top:"40px",
-      left:"760px"
+      left:"-50px"
     },
     cardsposition: "right",
     index: 1
@@ -284,11 +284,11 @@ export const playerPositions = [
   {
     player: {
       top:"300px",
-      left:"910px"
+      left:"50px"
     },
     badge: {
       top: "40px",
-      left: "760px"
+      left: "-100px"
     },
     cardsposition: "right",
     index: 2
@@ -361,7 +361,7 @@ export const playerPositions = [
     },
     badge: {
       top:"130px",
-      left:"270px"
+      left:"50px"
     },
     cardsposition: "left",
     index: 8

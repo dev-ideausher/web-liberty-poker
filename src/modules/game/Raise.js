@@ -31,7 +31,7 @@ export default function Raise({data, closeHandler}) {
         }
     }, []);
   return (
-    <div className='w-[420px] bg-white absolute flex flex-wrap justify-center mt-10 rounded-lg px-4 py-3 -top-72 z-50'>
+    <div className='w-[420px] popup-bg absolute flex flex-wrap justify-center mt-10 rounded-lg px-4 py-3 -top-72 z-50'>
         <div className='relative w-full flex'>
             <button className='absolute right-0 top-0' onClick={() => {
                 closeHandler(false)
@@ -50,7 +50,7 @@ export default function Raise({data, closeHandler}) {
 
         <div className='w-full grid grid-cols-4 gap-2 mt-3'>
             {data?.raiseSteps.map((item, index) => <Button value={item.value} variant={"teal"} buttontype={"sm"} className={"rounded-lg"} onClick={raiseStepHandler}>{item.label}</Button> )}
-            <Button variant={"primary"} buttontype={"sm"} onClick={submitHandler}>Submit</Button>
+            <Button variant={"primary"} buttontype={"sm"} className={"border-transparent"} onClick={submitHandler}>Submit</Button>
         </div>
         <div className='w-full grid grid-cols-1 gap-5 mt-2'>
         </div>

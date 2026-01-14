@@ -9,7 +9,6 @@ const faces = {
     Club: "/images/game-assets/club.svg",
 }
 export default function Card({face, value, used, open=false,faceValue, variant, className, ...attributes}) {
-    console.log(face, value, used, open=false,faceValue, variant,)
   return (
     <div className={`gameCard ${cn(cardVariants({variant, className}))} transition-all ${open? "active":""}`}>
         <div className='cardInner w-full h-full'>

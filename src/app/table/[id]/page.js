@@ -13,13 +13,14 @@ import MyPosition from '@/modules/TableModules/MyPosition'
 import PlayerPosition from '@/modules/TableModules/PlayerPosition'
 import Card from '@/modules/game/card'
 import { cardsPosition, playerPositions } from '@/utilities/staticData'
-import { showDescriptionMessage, showErrorMessage, showInfoMessage } from '@/utilities/toast'
+import { showDescriptionMessage, showErrorMessage, showInfoMessage, showSuccessMessage } from '@/utilities/toast'
 import { useParams, useRouter } from 'next/navigation'
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { calculateCoins,delay, isOwnView } from '@/utilities/helper';
 import Raise from '@/modules/game/Raise'
 import WinnerScreen from '@/modules/game/WinnerScreen'
 import Winner from '@/modules/WinningScreen/Winner'
+import Quit from '@/modules/game/quit'
 
 export default function page() {
     const router = useRouter()
@@ -222,7 +223,7 @@ export default function page() {
             });
             socket.on("unableToGetTableInfo", (payload) => {
                 showDescriptionMessage("Table Left","You have left the table you can join new one.");
-                // router.back()
+                router.back()
             })
             socket.on("playerJoined", (payload) => {
                 if(payload.status){
@@ -237,7 +238,7 @@ export default function page() {
             socket.on("roomLeft", (payload)=>{
                 if(payload.status){
                     showSuccessMessage(payload.message);
-                    // router.back();
+                    router.back();
                 }
                 else{
                     showErrorMessage(payload.message);
@@ -454,19 +455,19 @@ export default function page() {
         <div className="w-full bg-[url('/images/banners/match.png')] bg-cover py-2 min-h-screen relative">
             <div className='layout-container flex flex-col justify-between'>
                 <div className='w-full flex items-center justify-between'>
-                    <div onClick={()=>router.push("/sit")} className='table-btns rounded-lg size-16 flex items-center justify-center'><Back/></div>
+                    <Quit/>
                     <div className='table-btns rounded-lg size-16 flex items-center justify-center'><SettingsT/></div>
                 </div>
                 <div ref={playerRef} className='layout-container flex flex-wrap justify-center items-center relative'>
                     <div className='w-3/4 flex flex-wrap items-center justify-center relative'>
                         <img src='/images/table.svg' className='w-full object-fill rotate-180' />
-                        <div className='top-10 left-0 absolute w-full h-4/5 flex items-center justify-center z-20'>
+                        <div className='top-10 left-0 absolute w-full h-4/5 flex items-center justify-center z-10'>
                             <img src="/images/table-logo.svg" alt="logo" className='w-fit z-20' />
                         </div>
-                    <img src="/images/table-border.svg" alt="border" className='absolute h-2/3 w-3/4 top-[20%] left-[12.5%] rounded-full z-20'></img>
+                    <img src="/images/table-border.svg" alt="border" className='absolute h-2/3 w-3/4 top-[20%] left-[12.5%] rounded-full z-10'></img>
                     
                     {/* Game Pot */}
-                    <div style={{ top: `80px` }} className={`absolute flex flex-wrap items-center justify-center`}>
+                    <div style={{ top: `80px` }} className={`absolute flex flex-wrap items-center justify-center z-20`}>
                         <div className='flex items-center flex-col w-full'>
                         <span className='bg-[#2ED777] font-inter text-xs py-1 px-3 rounded-full font-medium w-fit flex justify-center'>
                             {details ? details.gameState?.pot : 0}
@@ -485,7 +486,7 @@ export default function page() {
                         </div>
                     </div>
                     {/* Community Cards */}
-                    <div className='absolute grid grid-cols-5'>
+                    <div className='absolute grid grid-cols-5 z-30'>
                         {communityCards && communityCards.map((item, index) => <Card
                             key={`player-card-${index}`} 
                             face={item.suit} 
@@ -540,14 +541,13 @@ export default function page() {
                         </div>}
                         <h5 role='button' className='table-btns py-2 px-5 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>AWAY</h5>
                     </div>
-                    <div className='flex items-center gap-3 relative'>
+                    <div className='flex items-center gap-3 relative w-2/5'>
                         {/* <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>FOLD</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>CHECK</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow min-w-32 text-center'>BET</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>RAISE</h5> */}
-                        {hasTurn && playerTurn && playerTurn.availableOptions.map((item, index) => <>
-                            <Button disabled={loading} variant={"gradient"} className={`rounded-[30px] text-[32px] font-ruso normal-text-shadow uppercase able-btns ${loading ? 'opacity-40':''}`} value={item} onClick={actionHandler}>{item=="call"?`${item}(${playerTurn.callAmount})`:item}</Button>
-                        </>)}
+                        {hasTurn && playerTurn && playerTurn.availableOptions.map((item, index) => <Button key={index} disabled={loading} variant={"gradient"} className={`rounded-[30px] text-2xl font-ruso normal-text-shadow uppercase table-btns ${loading ? 'opacity-40':''}`} value={item} onClick={actionHandler}>{item=="call"?`${item}(${playerTurn.callAmount})`:item}</Button>
+                        )}
                         {hasRaise && <Raise data={playerTurn} closeHandler={setHasRaise} />}
 
                     </div>
