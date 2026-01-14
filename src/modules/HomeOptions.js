@@ -10,11 +10,12 @@ import LoginModule from './LoginModule'
 import { getAuthToken } from '@/utilities/helper'
 import { removeToken, removeUserName } from '@/services/cookies'
 import {  useDisconnect } from "wagmi";
+import { useRouter } from 'next/navigation'
 
 export default function HomeOptions({className}) {
   const { disconnect } = useDisconnect();
   const [loggedIn, setLoggedIn] = useState(false)
-
+  const router = useRouter()
   useEffect(() => {
     // initial check
     if (getAuthToken()) {
@@ -27,9 +28,9 @@ export default function HomeOptions({className}) {
       {loggedIn ?  <div  className='red-gradient cursor-pointer left-[35%] flex items-center justify-center absolute size-[120px] rounded-full  flex-col'>
         <div onClick={() => {
           disconnect();
-          setOnboardingComplete(false);
           removeToken()
           removeUserName()
+          router.push("/")
         }}><Exit/></div>
            
         </div>

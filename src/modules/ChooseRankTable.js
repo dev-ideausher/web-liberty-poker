@@ -1,13 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Instruction from "@/icons/Instruction";
 import GreenTick from "@/icons/GreenTick";
 import RedCross from "@/icons/RedCross";
 import { TABLE_VARIANTS } from "@/utilities/staticData";
 
 export default function ChooseRankTable({ variant = 14 }) {
-  const tableData = TABLE_VARIANTS[variant];
+  const [tableData, setTableData] = useState(null);
+  useEffect(()=>{
+    setTableData(TABLE_VARIANTS[variant])
+  },[variant])
 
   const renderCell = (item) => {
     if (item.type === "heading") {
@@ -41,13 +44,13 @@ export default function ChooseRankTable({ variant = 14 }) {
       <p className="text-[30px] font-normal py-3.5 normal-text-shadow text-primary horizontal-gradient-border w-full text-center">
         {item.label}
       </p>
-    );
-  };
+    )
+  }
 
   return (
     <div className="w-full mt-10">
       <div className="w-full grid rank-table-grid">
-        {tableData.map((col, colIndex) => (
+        {tableData?.map((col, colIndex) => (
           <div
             key={colIndex}
             className={`flex flex-col items-center vertical-gradient-border ${
@@ -67,5 +70,5 @@ export default function ChooseRankTable({ variant = 14 }) {
         ))}
       </div>
     </div>
-  );
+  )
 }

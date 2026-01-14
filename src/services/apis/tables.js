@@ -1,4 +1,5 @@
-import { apiError, getAuthToken, responseValidator, URL } from "../helper";
+import { apiError , getAuthToken, responseValidator, URL} from "@/utilities/helper";
+
 
 export const getTables = async () => {
     const myHeaders = new Headers();
@@ -164,4 +165,20 @@ export const joinTableDirectly = async (payload) => {
     } catch (e) {
         return apiError(e);
     }
+}
+export const getAllTiers = async () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${getAuthToken()}`);
+    const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+    };
+    try{
+        const response = await fetch(URL+"matchmaking/tiers", requestOptions);
+        return responseValidator(response);
+    }
+    catch(e){
+        return apiError(e);
+    }  
 }

@@ -23,7 +23,7 @@ const inputVariants = cva("w-full peer focus:outline-none",{
         },
         type:{
             "email": "focus:border-primary focus:border-2",
-            "text": "focus:border-primary focus:border-2",
+            "text": "focus:border-primary ",
             "password": "focus:border-primary focus:border-2",
             "number": "disable-scroller",
             "date": "focus:border-primary focus:border-2 disable-scroller",

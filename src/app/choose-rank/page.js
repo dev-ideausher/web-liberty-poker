@@ -204,7 +204,7 @@ export default function Page() {
       await tx.wait();
 
       showSuccessMessage("Deposit successful!");
-      router.push("/table-ready");
+      router.push("/sit");
 
     } catch (err) {
       console.error(err);
