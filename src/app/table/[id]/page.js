@@ -493,7 +493,6 @@ export default function page() {
                             faceValue={item.cardFace} 
                             open={true} />
                         )}
-                        
                     </div>
 
                     {details && players.map((item, index) => item && <PlayerPosition
