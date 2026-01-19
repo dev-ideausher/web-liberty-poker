@@ -15,14 +15,14 @@ export default function Card({face, value, used, open=false,faceValue, variant, 
             <div className={`cardFront p-1.5 h-full w-full`}>
                 <div className={`${used?"border-3 border-success -translate-y-3":""} h-full w-full bg-white rounded flex flex-col flex-wrap items-center justify-between p-1`}>
                     <div className='w-full flex flex-wrap leading-none justify-start'>
-                        <h4 className='font-inter text-xs font-semibold'>{faceValue}</h4>
+                        <h4 className='font-inter text-xs font-semibold text-black'>{faceValue}</h4>
                         <div className='w-full'>
                             <img className='size-2' src={faces[face]} />
                         </div>
                     </div>
                     <img className='size-6' src={faces[face]} />
                     <div className='w-full flex flex-wrap leading-none justify-start rotate-180'>
-                        <h4 className='font-inter text-xs font-semibold'>{faceValue}</h4>
+                        <h4 className='font-inter text-xs font-semibold text-black'>{faceValue}</h4>
                         <div className='w-full flex justify-start'>
                             <img className='size-2' src={faces[face]} />
                         </div>

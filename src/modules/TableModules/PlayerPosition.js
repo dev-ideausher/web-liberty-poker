@@ -4,6 +4,7 @@ import UserInfoModal from "./UserInfoModal";
 import ReportUserModal from "./ReportUserModal";
 import Turn from "@/animations/Turn";
 import { BounceLoader } from "react-spinners";
+import CircularTurnTimer from "./CirculartTimer";
 
 export default function PlayerPosition({
   className,
@@ -61,39 +62,51 @@ export default function PlayerPosition({
         onClick={infoModalHandler}
         className={`cursor-pointer relative flex flex-col items-center justify-center ${opacity[status]}`}
       >
-        {/* Turn loader */}
-        {hasTurn && !ownView && (
-          <div className="absolute" style={{ top: "-13px" }}>
-            <BounceLoader size={"90px"} color="#fff" />
+       {/* Turn loader */}
+       {hasTurn && !ownView && (
+          <div
+            className="absolute"
+            style={{
+              top: "-10px",
+              left: "-10px",
+              zIndex: -1,
+            }}
+          >
+            <BounceLoader size={130} color="#fff" />
           </div>
         )}
 
         {/* Avatar */}
         <div className="size-28 relative">
-          <img
+          <CircularTurnTimer
+            seconds={30}
+            active={hasTurn}
+            size={112}  // circle size slightly bigger than avatar
+          />
+           <img
             src="/images/cat.png"
             className={`rounded-full size-28 border-8 ${
-              hasTurn ? "border-success" : "border-black"
-            }`}
+              hasTurn ? "border-transparent" : "border-black"
+            } relative`}
           />
         </div>
 
         {/* Badge */}
         <div
-          className="flex flex-col relative items-center justify-center py-1 px-3 w-[100px] overflow-hidden rounded-md -mt-2.5"
+          className="flex flex-col bg-black relative items-center justify-center py-1 px-3 w-[100px] overflow-hidden rounded-md -mt-2.5"
           style={{
             zIndex: 999,
-            background: hasTurn
+            color: hasTurn
               ? "#2ED777"
-              : "#000000",
+              : "#fff",
           }}
         >
           {hasTurn && <Turn trigger={hasTurn} user={player.user.username} />}
-          <h5 className="text-white text-xs font-inter text-center truncate">
-            {myposition} {player.user.username}
+          <h5 className=" text-xs font-inter text-center truncate">
+            {player.user.username}
           </h5>
-          <h4 className="font-inter text-sm text-white font-semibold">
-            {player.chipsInPlay}
+          <h4 className="font-inter text-sm font-semibold">
+            {player.chipsInPlay > 1 ? player.chipsInPlay : (player.chipsInPlay || 0).toFixed(2)}
           </h4>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default function Turn({children, trigger, user}) {
                 }
             }}
 
-            className='absolute top-0 left-0 z-50 h-full' style={{background: "rgba(0,0,0,0.2)"}}
+            className='absolute top-0 left-0 z-50 h-full w-full' style={{background: "rgba(0,0,0,0.2)"}}
         >
         </motion.span>
     )

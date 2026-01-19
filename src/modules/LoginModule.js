@@ -154,10 +154,19 @@ export default function LoginModule({setLoggedIn}) {
                 
                 setOnboardingComplete(true);
                 authenticateSocket()
-                // Add a small delay to ensure state updates
-                setTimeout(() => {
-                    router.push("/choose-rank");
-                }, 500);
+                if(loginResponse.data.balance > 5){
+                    // Add a small delay to ensure state updates
+                    setTimeout(() => {
+                        router.push("/sit");
+                    }, 500);
+                }else{
+                    // Add a small delay to ensure state updates
+                    setTimeout(() => {
+                        router.push("/choose-rank");
+                    }, 500);
+                }
+
+                
             } else {
                 throw new Error(loginResponse.message || "Login failed - invalid response from server");
             }
