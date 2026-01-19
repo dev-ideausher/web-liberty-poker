@@ -81,6 +81,7 @@ export const apiError = (e) => {
     return { status: false, message: e }
 }
 export const isOwnView = (socketId, userSocketId) => {
+    // console.log(socketId, userSocketId)
     if (socketId === userSocketId) {
         return true;
     }

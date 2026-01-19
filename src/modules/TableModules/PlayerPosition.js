@@ -36,21 +36,6 @@ export default function PlayerPosition({
     folded: "opacity-50",
     "all-in": "opacity-70",
   };
-  console.log(className,
-    position,
-    player,
-    hasTurn,
-    playerTurn,
-    meter,
-    isSmallBlind,
-    isBigBlind,
-    isDealer,
-    badgePosition,
-    cardsposition,
-    ownView = false,
-    status,
-    index,
-    myposition,)
   return (
     <div
       style={{ top: `${position.top}`, left: `${position.left}` }}
@@ -135,7 +120,7 @@ export default function PlayerPosition({
           className="text-white bottom-0 right-0 flex flex-wrap w-[220px] absolute"
           style={{ right: "-55%", bottom: "-15px" }}
         >
-          <div className="w-full bg-[rgba(0,0,0,0.25)] border border-[#ECF0F1] h-3 rounded-full mt-3 grid grid-cols-8 gap-0.5 px-0.5">
+          <div className="w-full bg-[rgba(0,0,0,0.25)] border border-[#ECF0F1] h-3 rounded-full mt-3 grid grid-cols-8 items-center gap-0.5 p-0.5">
             {[12.5, 25, 37.5, 50, 62.5, 75, 87.5].map((n, i) => (
               <div
                 key={i}
