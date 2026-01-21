@@ -88,10 +88,13 @@ export default function PlayerPosition({
         >
           {hasTurn && <Turn trigger={hasTurn} user={player.user.username} />}
           <h5 className=" text-xs font-inter text-center truncate">
-            {player.user.username}
+            {myposition} {player.user.username}
           </h5>
           <h4 className="font-inter text-sm font-semibold">
-            {player.chipsInPlay > 1 ? player.chipsInPlay : (player.chipsInPlay || 0).toFixed(2)}
+            {Number.isInteger(player?.chipsInPlay || 0)
+              ? player.chipsInPlay
+              : Number(player.chipsInPlay || 0).toFixed(2)
+            }
           </h4>
         </div>
       </div>

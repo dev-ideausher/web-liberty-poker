@@ -36,11 +36,11 @@ export default function page() {
         }
     }
     const nextHandler = async () => {
-        if(chipsCount < selectedTier.minBuy){
+        if(chipsCount < selectedSubTier.minBuy){
             showInfoMessage("Enterance amount should not be less than min value")
             return
         }
-        if(chipsCount > selectedTier.maxBuy){
+        if(chipsCount > selectedSubTier.maxBuy){
             showInfoMessage("Enterance amount should not be greater than max value")
             return
         }
@@ -137,9 +137,9 @@ export default function page() {
             
                 <h3 className='text-[55px] normal-text-shadow uppercase font-normal font-ruso leading-none mt-16'>ENTRANCE AMOUNT</h3>
                 <div className='flex items-end justify-center gap-2'>
-                    <h4 className='text-[32px] font-bold text-primary normal-text-shadow'>Min {selectedTier?.minBuy || 0} </h4>
+                    <h4 className='text-[32px] font-bold text-primary normal-text-shadow'>Min {selectedSubTier?.minBuy || 0} </h4>
                     <Input type="text" value={chipsCount} onChange={(e)=>setChipsinCount(e.target.value)} className="border-b-2 border-primary rounded-none text-[32px] bg-transparent w-28 outline-none text-primary text-center focus:outline-none" />
-                    <h4 className='text-[32px] font-bold text-primary normal-text-shadow'>Max {selectedTier?.maxBuy || 0} $</h4>
+                    <h4 className='text-[32px] font-bold text-primary normal-text-shadow'>Max {selectedSubTier?.maxBuy || 0} $</h4>
                 </div>
                 <button disabled={(!selectedSubTier || !chipsCount)} onClick={nextHandler} className={`bg-[url('/images/chip.svg')] bg-cover flex items-center justify-center w-[330px] h-64 mt-7 ${(!selectedSubTier || !chipsCount) ? 'opacity-30':''}`}>
                     {!loading && <p className='text-[40px] w-full font-cinzel font-black text-center leading-none -mt-4'>JOIN<br/> TABLE</p>}
