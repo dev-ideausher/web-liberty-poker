@@ -284,11 +284,11 @@ export const playerPositions = [
   {
     player: {
       top:"300px",
-      left:"50px"
+      left:"-10px"
     },
     badge: {
       top: "40px",
-      left: "-100px"
+      left: "200px"
     },
     cardsposition: "right",
     index: 2
