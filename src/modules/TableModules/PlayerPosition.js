@@ -28,27 +28,31 @@ export default function PlayerPosition({
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
 
-  const infoModalHandler = () => setShowInfoModal(!showInfoModal);
+  const infoModalHandler = () => {
+    if(!ownView)  setShowInfoModal(!showInfoModal);
+  }
   const reportModalHandler = () => setShowReportModal(!showReportModal);
 
   const opacity = {
     waiting: "opacity-35",
     folded: "opacity-50",
     "all-in": "opacity-70",
+    away: "opacity-60",
   };
+  
   return (
     <div
       style={{ top: `${position.top}`, left: `${position.left}` }}
       className={`${hasTurn ? "animate" : ""} absolute ${
         className || ""
-      } flex flex-wrap items-center justify-center z-30`}
+      } flex flex-wrap items-center justify-center z-50`}
     >
       <div
         onClick={infoModalHandler}
         className={`cursor-pointer relative flex flex-col items-center justify-center ${opacity[status]}`}
       >
        {/* Turn loader */}
-       {hasTurn && !ownView && (
+       {hasTurn && !ownView &&  status !== 'away' && (
           <div
             className="absolute"
             style={{
@@ -65,7 +69,7 @@ export default function PlayerPosition({
         <div className="size-28 relative">
           <CircularTurnTimer
             seconds={30}
-            active={hasTurn}
+            active={hasTurn && status !== 'away'}
             size={112}  // circle size slightly bigger than avatar
           />
            <img
@@ -74,13 +78,15 @@ export default function PlayerPosition({
               hasTurn ? "border-transparent" : "border-black"
             } relative`}
           />
+          
+
         </div>
 
         {/* Badge */}
         <div
           className="flex flex-col bg-black relative items-center justify-center py-1 px-3 w-[100px] overflow-hidden rounded-md -mt-2.5"
           style={{
-            zIndex: 999,
+            zIndex: 40,
             color: hasTurn
               ? "#2ED777"
               : "#fff",
@@ -116,11 +122,17 @@ export default function PlayerPosition({
           </div>
         </div>
       )}
-
+      {status === "away" && (
+        <div className="rounded-md bg-black/40 flex items-center justify-center px-2 py-0.5">
+          <span className="text-white text-xs font-semibold tracking-wide">
+            AWAY
+          </span>
+        </div>
+      )}
       {/* Meter */}
       {meter && ownView && (
         <div
-          className="text-white bottom-0 right-0 flex flex-wrap w-[220px] absolute"
+          className="text-white bottom-0 left-0 flex flex-wrap w-[200px] absolute"
           style={{ right: "-55%", bottom: "-15px" }}
         >
           <div className="w-full bg-[rgba(0,0,0,0.25)] border border-[#ECF0F1] h-3 rounded-full mt-3 grid grid-cols-8 items-center gap-0.5 p-0.5">

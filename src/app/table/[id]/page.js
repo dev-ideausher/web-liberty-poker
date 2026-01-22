@@ -28,7 +28,7 @@ export default function page() {
 
     const playerRef = useRef(null);
     const {id} = useParams()
-    const {getTableDetails, playerAction, handleShowDown, startGame, winningMeterEvent, leaveRoom,confirmPayment} = Poker();
+    const {getTableDetails, playerAction, handleShowDown, startGame, winningMeterEvent, leaveRoom,confirmPayment, setAwayUser, setBackUser } = Poker();
     const balance = useBalance();
     const [details, setDetails] = useState(null);
     const [players, setPlayers] = useState([]);
@@ -51,6 +51,7 @@ export default function page() {
     const [winnersList, setWinnerList] = useState(null);
     const [reBuy, setRebuy] = useState(false);
     const [loading,setLoading] = useState(false)
+    const [userAway,setUserAway] = useState(false)
     const socket = useWebSocket();
     const handlePlayerTurn = (payload) => {
         setPlayerTurn(payload.data);
@@ -187,7 +188,10 @@ export default function page() {
             leaveRoom();
         }
     }
-
+    const awayBackHandler = async () => {
+        if(userAway) setBackUser()
+        else setAwayUser()
+    }
     useEffect(() => {
         if (typeof window !== 'undefined') {
         const handleBeforeUnload = (event) => {
@@ -412,6 +416,17 @@ export default function page() {
             socket.on("rebuySuccess", (payload) => {
                 console.log(payload);
             });
+            // Player successfully marked as away
+            socket.on('awaySet', (data) => {
+                if(data.status) setUserAway(true)
+                // Disable away button, enable back button
+            });
+            
+            // Player successfully marked as back
+            socket.on('backSet', (data) => {
+                if(data.status) setUserAway(false)
+                // Enable away button, disable back button
+            });
             
             return () => {
                 socket.off('tableInfo');
@@ -448,6 +463,8 @@ export default function page() {
                 socket.off('playerRebought');
                 socket.off('playerActionStarted')
                 socket.off('playerActionEnded')
+                socket.off('awaySet')
+                socket.off('backSet')
             };
         }
     },[socket]);
@@ -539,14 +556,17 @@ export default function page() {
                             <Input type="text" placeholder="Text your message" className="bg-transparent border-none text-2xl font-normal text-primary placeholder:text-[#F4E17E80]" />
                             <div onClick={()=>setMessageState(false)} className='cursor-pointer'><Up/></div>
                         </div>}
-                        <h5 role='button' className='table-btns py-2 px-5 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>AWAY</h5>
+
+                        <h5 onClick={awayBackHandler} role='button' className='table-btns py-2 px-5 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>
+                            {userAway ? 'BACK':'AWAY'}
+                        </h5>
                     </div>
                     <div className='flex items-center gap-3 relative w-2/5'>
                         {/* <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>FOLD</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>CHECK</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow min-w-32 text-center'>BET</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>RAISE</h5> */}
-                        {hasTurn && playerTurn && playerTurn.availableOptions.map((item, index) => <Button key={index} disabled={loading} variant={"gradient"} className={`rounded-[30px] text-2xl font-ruso normal-text-shadow uppercase table-btns ${loading ? 'opacity-40':''}`} value={item} onClick={actionHandler}>{item=="call"?`${item}(${playerTurn.callAmount})`:item}</Button>
+                        {hasTurn && playerTurn && playerTurn.availableOptions.map((item, index) => <Button key={index} disabled={loading} variant={"gradient"} className={`rounded-[30px] text-2xl font-ruso normal-text-shadow uppercase table-btns ${loading ? 'opacity-40':''}`} value={item} onClick={actionHandler}>{item=="call"?`${item}(${(playerTurn.callAmount || 0).toFixed(2)})`:item}</Button>
                         )}
                         {hasRaise && <Raise data={playerTurn} closeHandler={setHasRaise} />}
 

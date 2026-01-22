@@ -40,6 +40,12 @@ export default function Poker() {
   const getMatchmakingSubTiers = () => {
     socket.emit("getMatchmakingSubTiers", {token: getAuthToken()});
   }
+  const setAwayUser = () => {
+    socket.emit("setAway", {token: getAuthToken()});
+  }
+  const setBackUser = () => {
+    socket.emit("setBack", {token: getAuthToken()});
+  }
   return {
     joinTable,
     getTableDetails,
@@ -52,7 +58,9 @@ export default function Poker() {
     tableJoinRequest,
     tableCreated,
     authenticateSocket,
-    getMatchmakingSubTiers
+    getMatchmakingSubTiers,
+    setAwayUser,
+    setBackUser
   }
 }
 
