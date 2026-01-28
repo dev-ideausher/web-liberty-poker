@@ -52,6 +52,7 @@ export default function page() {
     const [reBuy, setRebuy] = useState(false);
     const [loading,setLoading] = useState(false)
     const [userAway,setUserAway] = useState(false)
+    const [totalPlayers,setTotalPlayers] = useState([])
     const socket = useWebSocket();
     const handlePlayerTurn = (payload) => {
         setPlayerTurn(payload.data);
@@ -59,8 +60,9 @@ export default function page() {
     }
     
     const suffleTheWindow = (data) => {
-        console.log(data)
+        // console.log(data)
         if(data?.currentPlayers && data?.currentPlayers?.length>0){
+            setTotalPlayers(data?.currentPlayers)
             let arr = new Array(data.maxPlayers).fill(null);
             let players = data.currentPlayers;
             for(let i=0; i<players.length; i++){
@@ -530,6 +532,8 @@ export default function page() {
                         isBigBlind={bigBlind}
                         player={item}
                         status={item.status}
+                        away={item.isAway}
+                        bet={item.totalHandBet}
                         meter={winningMeter}
                     >
                         {cards && cards.map((it, ind) => <Card
@@ -557,16 +561,16 @@ export default function page() {
                             <div onClick={()=>setMessageState(false)} className='cursor-pointer'><Up/></div>
                         </div>}
 
-                        <h5 onClick={awayBackHandler} role='button' className='table-btns py-2 px-5 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>
+                        {totalPlayers?.length > 2 && <h5 onClick={awayBackHandler} role='button' className='table-btns py-2 px-5 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>
                             {userAway ? 'BACK':'AWAY'}
-                        </h5>
+                        </h5>}
                     </div>
                     <div className='flex items-center gap-3 relative w-2/5'>
                         {/* <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>FOLD</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>CHECK</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow min-w-32 text-center'>BET</h5>
                         <h5 role='button' className='table-btns py-2 px-4 rounded-[30px] text-[32px] font-normal font-ruso normal-text-shadow'>RAISE</h5> */}
-                        {hasTurn && playerTurn && playerTurn.availableOptions.map((item, index) => <Button key={index} disabled={loading} variant={"gradient"} className={`rounded-[30px] text-2xl font-ruso normal-text-shadow uppercase table-btns ${loading ? 'opacity-40':''}`} value={item} onClick={actionHandler}>{item=="call"?`${item}(${(playerTurn.callAmount || 0).toFixed(2)})`:item}</Button>
+                        {hasTurn && playerTurn && !userAway && playerTurn.availableOptions.map((item, index) => <Button key={index} disabled={loading} variant={"gradient"} className={`rounded-[30px] text-2xl font-ruso normal-text-shadow uppercase table-btns ${loading ? 'opacity-40':''}`} value={item} onClick={actionHandler}>{item=="call"?`${item}(${(playerTurn.callAmount || 0).toFixed(2)})`:item}</Button>
                         )}
                         {hasRaise && <Raise data={playerTurn} closeHandler={setHasRaise} />}
 

@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import UserInfoModal from "./UserInfoModal";
 import ReportUserModal from "./ReportUserModal";
 import Turn from "@/animations/Turn";
@@ -23,23 +23,28 @@ export default function PlayerPosition({
   index,
   myposition,
   children,
+  away, // <-- boolean now
+  bet
 }) {
   const playerRef = useRef(null);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showReportModal, setShowReportModal] = useState(false);
 
+  const isAway = !!away;
+  console.log(bet)
   const infoModalHandler = () => {
-    if(!ownView)  setShowInfoModal(!showInfoModal);
-  }
+    if (!ownView) setShowInfoModal(!showInfoModal);
+  };
   const reportModalHandler = () => setShowReportModal(!showReportModal);
 
   const opacity = {
     waiting: "opacity-35",
     folded: "opacity-50",
     "all-in": "opacity-70",
-    away: "opacity-60",
   };
-  
+
+  const opacityClass = isAway ? "opacity-60" : opacity[status] || "";
+
   return (
     <div
       style={{ top: `${position.top}`, left: `${position.left}` }}
@@ -49,10 +54,10 @@ export default function PlayerPosition({
     >
       <div
         onClick={infoModalHandler}
-        className={`cursor-pointer relative flex flex-col items-center justify-center ${opacity[status]}`}
+        className={`cursor-pointer relative flex flex-col items-center justify-center ${opacityClass}`}
       >
-       {/* Turn loader */}
-       {hasTurn && !ownView &&  status !== 'away' && (
+        {/* Turn loader */}
+        {hasTurn && !ownView && !isAway && (
           <div
             className="absolute"
             style={{
@@ -69,17 +74,15 @@ export default function PlayerPosition({
         <div className="size-28 relative">
           <CircularTurnTimer
             seconds={30}
-            active={hasTurn && status !== 'away'}
-            size={112}  // circle size slightly bigger than avatar
+            active={hasTurn && !isAway}
+            size={112}
           />
-           <img
+          <img
             src="/images/cat.png"
             className={`rounded-full size-28 border-8 ${
               hasTurn ? "border-transparent" : "border-black"
             } relative`}
           />
-          
-
         </div>
 
         {/* Badge */}
@@ -87,9 +90,7 @@ export default function PlayerPosition({
           className="flex flex-col bg-black relative items-center justify-center py-1 px-3 w-[100px] overflow-hidden rounded-md -mt-2.5"
           style={{
             zIndex: 40,
-            color: hasTurn
-              ? "#2ED777"
-              : "#fff",
+            color: hasTurn ? "#2ED777" : "#fff",
           }}
         >
           {hasTurn && <Turn trigger={hasTurn} user={player.user.username} />}
@@ -99,21 +100,20 @@ export default function PlayerPosition({
           <h4 className="font-inter text-sm font-semibold">
             {Number.isInteger(player?.chipsInPlay || 0)
               ? player.chipsInPlay
-              : Number(player.chipsInPlay || 0).toFixed(2)
-            }
+              : Number(player.chipsInPlay || 0).toFixed(2)}
           </h4>
         </div>
       </div>
 
       {/* Cards */}
-      {!(status == "waiting" || status == "folded") && (
+      {!(status === "waiting" || status === "folded") && (
         <div className="relative">
           <div
             className="absolute"
             style={
-              cardsposition == "right"
+              cardsposition === "right"
                 ? { top: "-60px", left: "-15px" }
-                : cardsposition == "left"
+                : cardsposition === "left"
                 ? { top: "-60px", left: "-140px" }
                 : { top: "-75px", left: "-110px" }
             }
@@ -122,13 +122,16 @@ export default function PlayerPosition({
           </div>
         </div>
       )}
-      {status === "away" && (
+
+      {/* Away badge */}
+      {isAway && (
         <div className="rounded-md bg-black/40 flex items-center justify-center px-2 py-0.5">
           <span className="text-white text-xs font-semibold tracking-wide">
             AWAY
           </span>
         </div>
       )}
+
       {/* Meter */}
       {meter && ownView && (
         <div
@@ -186,10 +189,7 @@ export default function PlayerPosition({
         />
       )}
       {showReportModal && (
-        <ReportUserModal
-          exitHandler={reportModalHandler}
-          position={position}
-        />
+        <ReportUserModal exitHandler={reportModalHandler} position={position} />
       )}
     </div>
   );
