@@ -1,12 +1,12 @@
 "use client";
+
+import React, { Suspense, useCallback, useEffect } from "react";
 import ProgressLoader from "@/components/ProgressLoader";
 import { useWebSocket } from "@/context/socketContext";
 import Poker from "@/hooks/Poker";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback, useEffect } from "react";
-// import { showErrorMessage } from "@/utils/toast"; // <- example, use your real path
 
-export default function Page() {
+function CreatingTableInner() {
   const router = useRouter();
   const socket = useWebSocket();
   const searchParams = useSearchParams();
@@ -14,24 +14,16 @@ export default function Page() {
 
   const table = searchParams.get("table");
 
-  const handler = () => {};
-
   const onCallStartGame = useCallback(
     (payload) => {
       if (!payload) return;
 
       if (payload.status) {
-        // Guard: table must exist
-        if (table) {
-          router.push(`/table/${table}`);
-        } else {
-          // showErrorMessage("Table id missing");
-          console.error("Table id missing");
-        }
+        if (table) router.push(`/table/${table}`);
+        else console.error("Table id missing");
 
         startGame({});
       } else {
-        // showErrorMessage(payload.message);
         console.error(payload.message);
       }
     },
@@ -42,10 +34,7 @@ export default function Page() {
     if (!socket) return;
 
     socket.on("callStartGame", onCallStartGame);
-
-    return () => {
-      socket.off("callStartGame", onCallStartGame);
-    };
+    return () => socket.off("callStartGame", onCallStartGame);
   }, [socket, onCallStartGame]);
 
   return (
@@ -69,7 +58,7 @@ export default function Page() {
             Creating Table For You
           </h2>
 
-          <ProgressLoader duration={15} className="w-1/2" onComplete={handler} />
+          <ProgressLoader duration={15} className="w-1/2" onComplete={() => {}} />
 
           <h1 className="text-[58px] text-primary font-normal font-bebas normal-text-shadow text-center leading-none mt-7">
             Earn 30% of commission for Life from Every Hand your Recruits Play
@@ -81,5 +70,13 @@ export default function Page() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="min-h-screen" />}>
+      <CreatingTableInner />
+    </Suspense>
   );
 }
