@@ -5,6 +5,7 @@ import ReportUserModal from "./ReportUserModal";
 import Turn from "@/animations/Turn";
 import { BounceLoader } from "react-spinners";
 import CircularTurnTimer from "./CirculartTimer";
+import UserCoins from "@/components/UserCoins";
 
 export default function PlayerPosition({
   className,
@@ -50,7 +51,7 @@ export default function PlayerPosition({
       style={{ top: `${position.top}`, left: `${position.left}` }}
       className={`${hasTurn ? "animate" : ""} absolute ${
         className || ""
-      } flex flex-wrap items-center justify-center z-50`}
+      } flex flex-wrap items-center justify-center z-40`}
     >
       <div
         onClick={infoModalHandler}
@@ -135,7 +136,7 @@ export default function PlayerPosition({
       {/* Meter */}
       {meter && ownView && (
         <div
-          className="text-white bottom-0 left-0 flex flex-wrap w-[200px] absolute"
+          className="text-white bottom-0 left-0 flex flex-wrap w-[200px] absolute z-20"
           style={{ right: "-55%", bottom: "-15px" }}
         >
           <div className="w-full bg-[rgba(0,0,0,0.25)] border border-[#ECF0F1] h-3 rounded-full mt-3 grid grid-cols-8 items-center gap-0.5 p-0.5">
@@ -179,6 +180,15 @@ export default function PlayerPosition({
           style={{ top: badgePosition.top, left: badgePosition.left }}
         />
       )}
+      {bet?.chipsInPot && parseFloat(bet?.chipsInPot) > 0 && (
+        <UserCoins
+          coinValue={bet.chipsInPot}
+          topP={badgePosition.top}
+          leftP={badgePosition.left}
+          from={"bottom"}
+        />
+      )}
+
 
       {/* Modals */}
       {showInfoModal && (

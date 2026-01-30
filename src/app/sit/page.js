@@ -54,7 +54,7 @@ export default function page() {
         if(response.status){
             setData(response.data)
             if(response.data.tableId) {
-                showSuccessMessage("Joining existing table")
+                // showSuccessMessage("Joining existing table")
                 joinTableHandler(response.data)
             }
         }
@@ -85,8 +85,8 @@ export default function page() {
     
         socket.on("roomJoined", (payload) => {
             console.log(payload.data);
-            showSuccessMessage(payload.message);
-            router.push(`/table/${payload.data._id}`);
+            // showSuccessMessage(payload.message);
+            router.push(`/creating-table?table=${payload.data._id}`);
         });
     
         socket.on("unableToJoin", (payload) => {

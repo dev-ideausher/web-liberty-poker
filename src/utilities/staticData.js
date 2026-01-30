@@ -263,7 +263,7 @@ export const playerPositions = [
       left:"750px"
     },
     badge:{
-      top:"130px",
+      top:"120px",
       left:"-50px"
     },
     cardsposition: "right",
@@ -275,7 +275,7 @@ export const playerPositions = [
       left:"910px"
     },
     badge: {
-      top:"40px",
+      top:"30px",
       left:"-50px"
     },
     cardsposition: "right",
@@ -287,7 +287,7 @@ export const playerPositions = [
       left:"-10px"
     },
     badge: {
-      top: "40px",
+      top: "30px",
       left: "200px"
     },
     cardsposition: "right",
@@ -299,7 +299,7 @@ export const playerPositions = [
       left:"750px"
     },
     badge: {
-      top:"-45px",
+      top:"-55px",
       left:"42px"
     },
     cardsposition: "right",
@@ -311,7 +311,7 @@ export const playerPositions = [
       left:"470px"
     },
     badge: {
-      top:"-45px",
+      top:"-55px",
       left:"42px"
     },
     cardsposition: "right",
@@ -323,7 +323,7 @@ export const playerPositions = [
       left:"220px"
     },
     badge: {
-      top:"-45px",
+      top:"-55px",
       left:"42px"
     },
     cardsposition: "left",
@@ -335,7 +335,7 @@ export const playerPositions = [
       left:"-20px"
     },
     badge: {
-      top: "40px",
+      top: "30px",
       left: "130px"
     },
     cardsposition: "left",
@@ -348,7 +348,7 @@ export const playerPositions = [
       left:"-20px"
     },
     badge: {
-      top:"40px",
+      top:"30px",
       left:"130px"
     },
     cardsposition: "left",
@@ -360,7 +360,7 @@ export const playerPositions = [
       left:"220px"
     },
     badge: {
-      top:"130px",
+      top:"120px",
       left:"50px"
     },
     cardsposition: "left",

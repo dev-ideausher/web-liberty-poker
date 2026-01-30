@@ -53,6 +53,7 @@ export default function page() {
     const [loading,setLoading] = useState(false)
     const [userAway,setUserAway] = useState(false)
     const [totalPlayers,setTotalPlayers] = useState([])
+    const [gameStats,setGameStats] = useState([])
     const socket = useWebSocket();
     const handlePlayerTurn = (payload) => {
         setPlayerTurn(payload.data);
@@ -63,6 +64,7 @@ export default function page() {
         // console.log(data)
         if(data?.currentPlayers && data?.currentPlayers?.length>0){
             setTotalPlayers(data?.currentPlayers)
+            setGameStats(data?.gameState)
             let arr = new Array(data.maxPlayers).fill(null);
             let players = data.currentPlayers;
             for(let i=0; i<players.length; i++){
@@ -71,7 +73,7 @@ export default function page() {
             }
             for(let i=0; i<arr.length; i++){
                 if(arr[i] && isOwnView(socket.id, arr[i].socketId)){
-                setPlayerWindow(4-i);
+                    setPlayerWindow(4-i);
                 }
             }
             setPlayers([...arr]);
@@ -224,12 +226,13 @@ export default function page() {
                     suffleTheWindow(payload.data);
                 }
                 else{
+                    console.log(payload)
                     showErrorMessage(payload.message);
                 }
             });
             socket.on("unableToGetTableInfo", (payload) => {
                 showDescriptionMessage("Table Left","You have left the table you can join new one.");
-                router.back()
+                router.push("/sit")
             })
             socket.on("playerJoined", (payload) => {
                 if(payload.status){
@@ -244,7 +247,7 @@ export default function page() {
             socket.on("roomLeft", (payload)=>{
                 if(payload.status){
                     showSuccessMessage(payload.message);
-                    router.back();
+                    router.push("/");
                 }
                 else{
                     showErrorMessage(payload.message);
@@ -533,7 +536,7 @@ export default function page() {
                         player={item}
                         status={item.status}
                         away={item.isAway}
-                        bet={item.totalHandBet}
+                        bet={gameStats.players[index]}
                         meter={winningMeter}
                     >
                         {cards && cards.map((it, ind) => <Card
